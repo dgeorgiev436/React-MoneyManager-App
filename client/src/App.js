@@ -1,8 +1,11 @@
-import React, {useState} from "react"
-
+import React, {Fragment, useState} from "react"
 import Expenses from "./components/Expenses/Expenses"
 import NewExpense from "./components/NewExpense/NewExpense"
 import Chart from "./components/Chart/Chart"
+import store from "./store"
+import {Provider} from "react-redux"
+import {BrowserRouter as Router,Routes, Route, Switch} from "react-router-dom" 
+import Landing from "./components/Layout/Landing"
 
 	const DUMMY_EXPENSES = [
     {
@@ -42,10 +45,15 @@ const App = () => {
 	}
 	
   return (
-    <div>
-      <NewExpense onAddExpense={addExpenseHandler}/>
-	 <Expenses items = {expenses}></Expenses>
-    </div>
+	<Provider store={store}>
+		<Router>
+			<Routes>
+				<Route exact path="/" component={Landing}/>
+			</Routes>
+		</Router>
+		<NewExpense onAddExpense={addExpenseHandler}/>
+		<Expenses items = {expenses}></Expenses>
+	</Provider>
   );
 }
 
