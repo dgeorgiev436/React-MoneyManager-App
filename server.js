@@ -13,6 +13,7 @@ app.get("/", (req,res) => {
 
 app.use("/api/users", require("./routes/api/user"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/expenses", require("./routes/api/expenses"));
 
 
 
