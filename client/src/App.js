@@ -1,11 +1,15 @@
-import React, {Fragment, useState} from "react"
+import React, {Fragment,useState, useEffect} from "react"
 import Expenses from "./components/Expenses/Expenses"
 import NewExpense from "./components/NewExpense/NewExpense"
 import Chart from "./components/Chart/Chart"
 import store from "./store"
 import {Provider} from "react-redux"
-import {BrowserRouter as Router,Routes, Route, Switch} from "react-router-dom" 
+import {Routes, Route} from "react-router-dom" 
 import Landing from "./components/Layout/Landing"
+import Register from "./components/Auth/Register"
+import Login from "./components/Auth/Login"
+import PrivateRoute from "./components/Routing/PrivateRoute"
+import {loadUser} from "./actions/auth"
 
 	const DUMMY_EXPENSES = [
     {
@@ -37,6 +41,9 @@ import Landing from "./components/Layout/Landing"
 const App = () => {
 	const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
 
+	// useEffect(() => {
+	// 	store.dispatch(loadUser())
+	// }, [])
 	
 	const addExpenseHandler = (expense) => {
 		setExpenses(prevExpenses => {
@@ -46,13 +53,19 @@ const App = () => {
 	
   return (
 	<Provider store={store}>
-		<Router>
-			<Routes>
-				<Route exact path="/" component={Landing}/>
-			</Routes>
-		</Router>
-		<NewExpense onAddExpense={addExpenseHandler}/>
-		<Expenses items = {expenses}></Expenses>
+		<Routes>
+			<Route exact path="/" element={<Landing />}/>
+			<Route exact path="/register" element={<Register />}/>
+			<Route exact path="/login" element={<Login />}/>
+			<Route path="/dashboard" element={
+					<PrivateRoute>
+						<div>  
+							<NewExpense onAddExpense={addExpenseHandler}/> 
+							<Expenses items = {expenses}></Expenses>
+						</div>
+					</PrivateRoute>}>
+			</Route>
+		</Routes>
 	</Provider>
   );
 }
