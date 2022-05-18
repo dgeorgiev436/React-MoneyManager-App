@@ -1,12 +1,19 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import ExpensesFilter from "./ExpensesFilter"
 import ExpensesList from "./ExpensesList"
 import Card from "../UI/Card";
 import ExpensesChart from "./ExpensesChart"
 import "./Expenses.css"
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
+import {getAllUserExpenses} from "../../actions/expense"
 
 const Expenses = (props) => {
-	const [filteredYear, setFilteredYear] = useState("2020");
+	const [filteredYear, setFilteredYear] = useState("2022");
+	
+	useEffect(() => {
+		props.getAllUserExpenses()
+	}, [props.getAllUserExpenses])
 	
 	const filterChangeHandler = (selectedYear) => {
 		setFilteredYear(selectedYear)
@@ -25,4 +32,14 @@ const Expenses = (props) => {
 	)
 }
 
-export default Expenses
+const mapStateToProps = state => ({
+	expense: state.expense
+})
+
+Expenses.propTypes = {
+	expense: PropTypes.object.isRequired,
+	getAllUserExpenses: PropTypes.func.isRequired
+}
+
+
+export default connect(mapStateToProps, {getAllUserExpenses})(Expenses);

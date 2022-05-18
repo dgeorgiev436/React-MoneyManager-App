@@ -1,5 +1,8 @@
 import React, { useState } from "react"
 import "./ExpenseForm.css"
+import {addExpense} from "../../actions/expense"
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
 
 // USIGN SAPARATE STATES FOR EACH INPUT AND USING SIGNLE STATE FOR ALL INPUTS
 const ExpenseForm = (props) => {
@@ -52,6 +55,8 @@ const ExpenseForm = (props) => {
 			date: new Date(enteredDate)
 		}
 		
+		props.addExpense(enteredTitle, enteredAmount, enteredDate)
+		
 // 		Custom component function from NewExpense.js
 		props.onSaveExpenseData(expenseData);
 		
@@ -85,4 +90,15 @@ const ExpenseForm = (props) => {
 	)
 }
 
-export default ExpenseForm
+
+const mapStateToProps = state => ({
+
+})
+
+ExpenseForm.propTypes = {
+	addExpense: PropTypes.func.isRequired	
+}
+
+
+
+export default connect(mapStateToProps, {addExpense})(ExpenseForm)
