@@ -6,20 +6,28 @@ import ExpensesChart from "./ExpensesChart"
 import "./Expenses.css"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
-import {getAllUserExpenses} from "../../actions/expense"
 
-const Expenses = (props) => {
+const Expenses = ({getAllUserExpenses, currentState}) => {
 	const [filteredYear, setFilteredYear] = useState("2022");
+	let filteredArray = []
 	
-	useEffect(() => {
-		props.getAllUserExpenses()
-	}, [props.getAllUserExpenses])
 	
 	const filterChangeHandler = (selectedYear) => {
 		setFilteredYear(selectedYear)
 	}
 	
-	const filteredArray = props.items.filter(expense => expense.date.getFullYear().toString() === filteredYear)
+// 	If array exists
+	if(currentState.expense.expense){
+
+// 		Filter through the array and return expenses for current year
+		filteredArray = currentState.expense.expense.filter((expense) => {
+			expense.date = new Date(expense.date)
+			return expense.date.getFullYear().toString() === filteredYear
+		})
+		
+
+	}
+
 
 	return (
 	<div>
@@ -33,13 +41,12 @@ const Expenses = (props) => {
 }
 
 const mapStateToProps = state => ({
-	expense: state.expense
+	currentState: state
 })
 
 Expenses.propTypes = {
-	expense: PropTypes.object.isRequired,
-	getAllUserExpenses: PropTypes.func.isRequired
+	currentState: PropTypes.object.isRequired
 }
 
 
-export default connect(mapStateToProps, {getAllUserExpenses})(Expenses);
+export default connect(mapStateToProps, {})(Expenses);

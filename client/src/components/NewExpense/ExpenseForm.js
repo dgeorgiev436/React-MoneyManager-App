@@ -4,61 +4,34 @@ import {addExpense} from "../../actions/expense"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
 
+
 // USIGN SAPARATE STATES FOR EACH INPUT AND USING SIGNLE STATE FOR ALL INPUTS
 const ExpenseForm = (props) => {
 	const [enteredTitle, setEnteredTitle] = useState("");
 	const [enteredAmount, setEnteredAmount] = useState("");
 	const [enteredDate, setEnteredDate] = useState("");
-	// const [userInput, setUserInput] = useState({
-	// 	enteredTitle: "",
-	// 	enteredAmount: "",
-	// 	enteredDate: ""
-	// })
+	let expenseDate = {}
+	
 	
 	const titleChangeHandler = (event) => {
 		setEnteredTitle(event.target.value);
 		
-		// setUserInput({
-		// 	...userInput,
-		// 	enteredTitle: event.target.value
-		// })
-		
-// 		USIGN THE BUILT IN PREVSTATE METHOD
-		// setUserInput((prevState) => {
-		// 	return {
-		// 		...prevState,
-		// 		enteredTitle: event.target.value
-		// 	}
-		// })
 	}
 	const amountChangeHandler = (event) => {
 		setEnteredAmount(event.target.value);
-		// setUserInput({
-		// 	...userInput,
-		// 	enteredAmount: event.target.value
-		// })
 	}
 	const dateChangeHandler = (event) => {
-		setEnteredDate(event.target.value);
-		// setUserInput({
-		// 	...userInput,
-		// 	enteredDate: event.target.value
-		// })
+		
+		setEnteredDate(event.target.value)
+		
 	}
 	
 	const submitHandler = (event) => {
 		event.preventDefault();
 		
-		const expenseData = {
-			title: enteredTitle,
-			amount: +enteredAmount,
-			date: new Date(enteredDate)
+		if(enteredTitle && enteredAmount && enteredDate){
+			props.addExpense(enteredTitle, enteredAmount, enteredDate)
 		}
-		
-		props.addExpense(enteredTitle, enteredAmount, enteredDate)
-		
-// 		Custom component function from NewExpense.js
-		props.onSaveExpenseData(expenseData);
 		
 		setEnteredTitle("");
 		setEnteredAmount("");

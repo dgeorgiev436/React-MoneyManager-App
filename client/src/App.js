@@ -39,17 +39,12 @@ import {loadUser} from "./actions/auth"
   ];
 
 const App = () => {
-	const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+
 
 	// useEffect(() => {
 	// 	store.dispatch(loadUser())
 	// }, [])
 	
-	const addExpenseHandler = (expense) => {
-		setExpenses(prevExpenses => {
-			return[expense, ...prevExpenses]
-		})
-	}
 	
   return (
 	<Provider store={store}>
@@ -60,8 +55,8 @@ const App = () => {
 			<Route path="/dashboard" element={
 					<PrivateRoute>
 						<div>  
-							<NewExpense onAddExpense={addExpenseHandler}/> 
-							<Expenses items = {expenses}></Expenses>
+							<NewExpense/> 
+							<Expenses />
 						</div>
 					</PrivateRoute>}>
 			</Route>

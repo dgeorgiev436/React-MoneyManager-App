@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ADD_EXPENSE, ADD_EXPENSE_ERROR, GET_ALL_USER_EXPENSES, GET_ALL_USER_EXPENSES_ERROR} from "./types"
+import {ADD_EXPENSE, ADD_EXPENSE_ERROR, GET_ALL_USER_EXPENSES, GET_ALL_USER_EXPENSES_ERROR, DELETE_EXPENSE, DELETE_EXPENSE_ERROR} from "./types"
 
 
 
@@ -36,8 +36,10 @@ export const addExpense = (title, amount, date) => async dispatch => {
 			"Content-Type": "application/json"
 		}
 	}
+	
+	date = new Date(date);
 
-	const body = JSON.stringify({title, amount})
+	const body = JSON.stringify({title, amount, date})
 	
 	try{
 		
@@ -57,5 +59,26 @@ export const addExpense = (title, amount, date) => async dispatch => {
 		})
 		
 		
+	}
+}
+
+
+// REMOVE EXPENSE
+
+export const removeExpense = (id) => async dispatch => {
+	
+	try{
+		
+		const res = await axios.delete(`/api/expenses/${id}`)
+		
+		dispatch({
+			tpye: DELETE_EXPENSE
+		})
+		
+	}catch(err){
+		
+		dispatch({
+			type: DELETE_EXPENSE_ERROR
+		})
 	}
 }

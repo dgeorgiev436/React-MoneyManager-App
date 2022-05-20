@@ -4,6 +4,4 @@ import alert from "./alert"
 import expense from "./expense"
 
 
-export default combineReducers({
-	auth, alert, expense
-});
+export default combineReducers({auth, alert, expense});

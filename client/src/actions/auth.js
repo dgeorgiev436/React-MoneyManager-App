@@ -2,6 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import {LOAD_USER, AUTH_ERROR, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE} from "./types"
 import {setAlert} from "./alert"
+import {getAllUserExpenses} from "./expense"
 
 
 // LOAD USER
@@ -49,7 +50,9 @@ export const registerUser = (name, email, password) => async dispatch => {
 		})
 		
 // 		Loading user right after registration
-		dispatch(loadUser())		
+		dispatch(loadUser())	
+		
+		dispatch(getAllUserExpenses())
 		
 	}catch(err){
 		
@@ -85,7 +88,10 @@ export const login = (email, password) => async dispatch => {
 		})
 		
 // 		Load user immediatelly after login
-		dispatch(loadUser())
+		dispatch(loadUser());
+		
+		
+		dispatch(getAllUserExpenses());
 		
 	}catch(err){
 		const errors = err.response.data.errors;

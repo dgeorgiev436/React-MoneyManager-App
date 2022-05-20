@@ -53,3 +53,19 @@
     padding: 0.5rem 1.5rem;
   }
 }
+
+.btn-delete-expense {
+	background-color: transparent;
+	color: white;
+	font-size: 0.75rem;
+	padding: 0.25rem 0.75rem;
+	margin-right: 10px;
+	border-radius: 12px;
+	border-color: #BEBEBE;
+	transition: 0.5s;
+}
+
+.btn-delete-expense:hover {
+	background-color: #BEBEBE;
+	color: black;
+}

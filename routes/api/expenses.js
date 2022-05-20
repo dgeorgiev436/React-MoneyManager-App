@@ -26,7 +26,8 @@ router.post("/", auth, [
 		const newExpense = {
 			title: req.body.title,
 			amount: req.body.amount,
-			user: req.user.id
+			user: req.user.id,
+			date: req.body.date
 		}
 		
 		const expense = new Expense(newExpense)
@@ -60,6 +61,33 @@ router.get("/", auth, async(req,res) => {
 		res.status(500).send("Server error")
 	}
 })
+
+// @route 	DELETE api/expenses/:id
+// @desc 	Delete specific expense by id
+// @access 	Private
+router.delete("/:id", auth, async(req,res) => {
+	
+	try{
+		
+		const expense = await Expense.findById(req.params.id)
+		
+// 		Authorization check
+		if(expense.user.toString() !== req.user.id){
+			return res.status(401).json({msg: "User not authorized"})
+		}
+	
+	
+		await expense.remove();
+		
+		res.json({msg: "Post removed"});
+		
+		
+	}catch(err){
+		console.error(err.message);
+		res.status(500).send("Server error")
+	}
+})
+
 
 
 
