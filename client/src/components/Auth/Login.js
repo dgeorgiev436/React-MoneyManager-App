@@ -1,8 +1,9 @@
 import {Fragment, useState} from "react";
-import {Link, Navigate} from "react-router-dom"
+import {Link, Navigate, useNavigate } from "react-router-dom"
 import {login} from "../../actions/auth"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
+import Modal from "../UI/Modal"
 
 // Destructure props within the function parameters brackets
 const Login = ({ login, isAuthenticated}) => {
@@ -10,6 +11,15 @@ const Login = ({ login, isAuthenticated}) => {
 		email: "",
 		password: "",
 	})
+	const navigate = useNavigate();
+	
+	const [isVisible, setIsVisible] = useState(true)
+	
+	const onCancelHandler = () => {
+		setIsVisible(false);
+		navigate("/")
+	}
+	
 	
 	const {email, password} = formData
 	
@@ -29,9 +39,8 @@ const Login = ({ login, isAuthenticated}) => {
 		return <Navigate to="/dashboard"/>
 	}
 	
-	return(
-		<Fragment>
-			  <h1 className="large text-primary">Sign In</h1>
+	const loginModalContent = <Fragment>
+			 <h1 className="large text-primary">Sign In</h1>
 			  <hr></hr>
 			  <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account </p>
 			  <form onSubmit={onSubmitHandler} className="form">
@@ -53,7 +62,14 @@ const Login = ({ login, isAuthenticated}) => {
 			  <p className="my-1">
 				Don't have an account? <Link to="/register">Sign Up</Link>
 			  </p>
+			  <button onClick={onCancelHandler}>Cancel</button>
 		</Fragment>
+	
+	
+	return(
+		<Modal>
+			 {isVisible && loginModalContent}
+		</Modal>
 	)
 }
 

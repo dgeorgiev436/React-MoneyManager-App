@@ -1,9 +1,10 @@
 import {Fragment, useState} from "react";
-import {Link, Navigate} from "react-router-dom"
+import {Link, Navigate, useNavigate} from "react-router-dom"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import {registerUser} from "../../actions/auth"
 import {setAlert} from "../../actions/alert"
+import Modal from "../UI/Modal"
 
 const Register = ({isAuthenticated, registerUser}) => {
 	
@@ -13,8 +14,16 @@ const Register = ({isAuthenticated, registerUser}) => {
 		password: "",
 		password2: ""
 	});
+	const navigate = useNavigate();
+	
+	const [isVisible, setIsVisible] = useState(true)
 	
 	const {name, email, password, password2} = formData;
+	
+	const onCancelHandler = () => {
+		setIsVisible(false);
+		navigate("/")
+	}
 	
 	const onChangeHandler = (event) => {
 		setFormData({...formData, [event.target.name]: event.target.value })
@@ -42,9 +51,10 @@ const Register = ({isAuthenticated, registerUser}) => {
 		return <Navigate to="/dashboard"/>
 	}
 	
-	return(
-		<Fragment>
-			  <h1 className="large text-primary">Sign Up</h1>
+	
+	const registerContent = <Fragment>
+		  
+			 <h1 className="large text-primary">Sign Up</h1>
 			  <hr></hr>
 			  <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
 			  <form onSubmit={onSubmitHandler} className="form">
@@ -79,7 +89,14 @@ const Register = ({isAuthenticated, registerUser}) => {
 			  <p className="my-1">
 				Already have an account? <Link to="/login">Sign In</Link>
 			  </p>
-		</Fragment>
+			  <button onClick={onCancelHandler}>Cancel</button>
+			  
+		  </Fragment>
+	
+	return(
+		<Modal>
+			 { isVisible && registerContent}
+		</Modal>
 	)
 }
 
