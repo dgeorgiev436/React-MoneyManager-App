@@ -8,6 +8,7 @@ import PropTypes from "prop-types"
 
 
 const ExpenseItem = (props) => {
+	
 	const removeExpenseHandler = () => {
 		props.removeExpense(props.id)
 	}

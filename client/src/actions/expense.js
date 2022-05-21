@@ -1,5 +1,6 @@
 import axios from "axios";
 import {ADD_EXPENSE, ADD_EXPENSE_ERROR, GET_ALL_USER_EXPENSES, GET_ALL_USER_EXPENSES_ERROR, DELETE_EXPENSE, DELETE_EXPENSE_ERROR} from "./types"
+import {setAlert} from "./alert"
 
 
 
@@ -72,8 +73,12 @@ export const removeExpense = (id) => async dispatch => {
 		const res = await axios.delete(`/api/expenses/${id}`)
 		
 		dispatch({
-			tpye: DELETE_EXPENSE
-		})
+			type: DELETE_EXPENSE,
+			payload: id
+		});
+		
+		
+		// dispatch(setAlert("Post Removed", "success"))
 		
 	}catch(err){
 		
