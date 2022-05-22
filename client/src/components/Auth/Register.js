@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import {registerUser} from "../../actions/auth"
 import {setAlert} from "../../actions/alert"
 import Modal from "../UI/Modal"
+import "./Form.css"
 
 const Register = ({isAuthenticated, registerUser}) => {
 	
@@ -52,19 +53,19 @@ const Register = ({isAuthenticated, registerUser}) => {
 	}
 	
 	
-	const registerContent = <Fragment>
+	const registerContent = <div className="login-box">
 		  
 			 <h1 className="large text-primary">Sign Up</h1>
 			  <hr></hr>
 			  <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
 			  <form onSubmit={onSubmitHandler} className="form">
-				<div className="form-group">
+				<div className="user-box">
 				  <input type="text" placeholder="Name" onChange={onChangeHandler} value={name} name="name" required />
 				</div>
-				<div className="form-group">
+				<div className="user-box">
 				  <input type="email" onChange={onChangeHandler} value={email} required placeholder="Email Address" name="email" />
 				</div>
-				<div className="form-group">
+				<div className="user-box">
 				  <input
 					type="password"
 					placeholder="Password"
@@ -74,7 +75,7 @@ const Register = ({isAuthenticated, registerUser}) => {
 					minLength="6"
 				  />
 				</div>
-				<div className="form-group">
+				<div className="user-box">
 				  <input
 					type="password"
 					placeholder="Confirm Password"
@@ -89,9 +90,9 @@ const Register = ({isAuthenticated, registerUser}) => {
 			  <p className="my-1">
 				Already have an account? <Link to="/login">Sign In</Link>
 			  </p>
-			  <button onClick={onCancelHandler}>Cancel</button>
+			  <button className="btn" onClick={onCancelHandler}>Cancel</button>
 			  
-		  </Fragment>
+		  </div>
 	
 	return(
 		<Modal cancelHandler={onCancelHandler}>

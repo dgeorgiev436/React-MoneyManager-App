@@ -1,10 +1,16 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Fragment} from "react"
 import "./Landing.css"
+import {logout} from "../../actions/auth"
 
-const Navbar = ({}) => {
+const Navbar = ({isAuthenticated, logout}) => {
+	const navigate = useNavigate()
+	
+	const logoutHandler = () => {
+		logout()
+	}
 	
 	
 	return(
@@ -14,7 +20,7 @@ const Navbar = ({}) => {
      	<Link to="/"><i className="icon fa-solid fa-sack-dollar"></i> MoneyManager</Link>
         <nav className="nav-bar">
             <ul> 
-                <Link to="/login"> Sign Up</Link>
+				{isAuthenticated ? <a onClick={logoutHandler} href="/">Logout</a> : <Link to="/login"> Sign Up</Link>}
             </ul>
         </nav>
 
@@ -22,5 +28,14 @@ const Navbar = ({}) => {
 	)
 }
 
+Navbar.propTypes = {
+	isAuthenticated: PropTypes.bool.isRequired,
+	logout: PropTypes.func.isRequired
+}
 
-export default Navbar;
+// Get the current state to the component
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, {logout})(Navbar);

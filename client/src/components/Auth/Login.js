@@ -4,6 +4,7 @@ import {login} from "../../actions/auth"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import Modal from "../UI/Modal"
+import "./Form.css"
 
 // Destructure props within the function parameters brackets
 const Login = ({ login, isAuthenticated}) => {
@@ -41,15 +42,15 @@ const Login = ({ login, isAuthenticated}) => {
 		return <Navigate to="/dashboard"/>
 	}
 	
-	const loginModalContent = <Fragment>
+	const loginModalContent = <div className="login-box">
 			 <h1 className="large text-primary">Sign In</h1>
 			  <hr></hr>
 			  <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account </p>
 			  <form onSubmit={onSubmitHandler} className="form">
-				<div className="form-group">
+				<div className="user-box">
 				  <input type="email" onChange={onChangeHandler} value={email} required placeholder="Email Address" name="email" />
 				</div>
-				<div className="form-group">
+				<div className="user-box">
 				  <input
 					type="password"
 					placeholder="Password"
@@ -64,8 +65,8 @@ const Login = ({ login, isAuthenticated}) => {
 			  <p className="my-1">
 				Don't have an account? <Link to="/register">Sign Up</Link>
 			  </p>
-			  <button onClick={onCancelHandler}>Cancel</button>
-		</Fragment>
+			  <button className="btn" onClick={onCancelHandler}>Cancel</button>
+		</div>
 	
 	
 	return(
