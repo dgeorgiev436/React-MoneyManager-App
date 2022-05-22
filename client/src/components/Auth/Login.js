@@ -7,6 +7,7 @@ import Modal from "../UI/Modal"
 
 // Destructure props within the function parameters brackets
 const Login = ({ login, isAuthenticated}) => {
+	
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
@@ -33,6 +34,7 @@ const Login = ({ login, isAuthenticated}) => {
 		login(email, password)
 		
 	}
+	
 	
 // 	Redirect if logged in
 	if(isAuthenticated) {
@@ -67,7 +69,7 @@ const Login = ({ login, isAuthenticated}) => {
 	
 	
 	return(
-		<Modal>
+		<Modal cancelHandler = {onCancelHandler}>
 			 {isVisible && loginModalContent}
 		</Modal>
 	)

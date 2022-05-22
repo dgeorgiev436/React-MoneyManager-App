@@ -10,6 +10,7 @@ import Register from "./components/Auth/Register"
 import Login from "./components/Auth/Login"
 import PrivateRoute from "./components/Routing/PrivateRoute"
 import {loadUser} from "./actions/auth"
+import Navbar from "./components/Layout/Navbar"
 
 	const DUMMY_EXPENSES = [
     {
@@ -48,6 +49,7 @@ const App = () => {
 	
   return (
 	<Provider store={store}>
+		<Navbar />
 		<Routes>
 			<Route exact path="/" element={<Landing />}/>
 			<Route exact path="/register" element={<Register />}/>

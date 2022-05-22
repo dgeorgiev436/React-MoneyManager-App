@@ -94,7 +94,7 @@ const Register = ({isAuthenticated, registerUser}) => {
 		  </Fragment>
 	
 	return(
-		<Modal>
+		<Modal cancelHandler={onCancelHandler}>
 			 { isVisible && registerContent}
 		</Modal>
 	)
