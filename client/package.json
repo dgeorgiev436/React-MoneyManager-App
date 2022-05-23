@@ -45,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-	 "proxy": "https://moneymanager.run-eu-central1.goorm.io"
+  "proxy": "http://localhost:5000"
 }
