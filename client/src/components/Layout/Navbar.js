@@ -18,7 +18,7 @@ const Navbar = ({isAuthenticated, logout}) => {
      	<Link to="/"><i className="icon fa-solid fa-sack-dollar"></i> MoneyManager</Link>
         <nav className="nav-bar">
             <ul> 
-				{isAuthenticated ? <a onClick={logoutHandler} href="/">Logout</a> : <Link to="/login"> Sign Up</Link>}
+				{isAuthenticated ? <a onClick={logoutHandler} href="#">Logout</a> : <Link to="/login"> Sign Up</Link>}
             </ul>
         </nav>
 
