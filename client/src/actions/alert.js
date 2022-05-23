@@ -6,7 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
 // 	Generate random id with the uuid package
 	 const id = uuidv4();
-
+	
+	 dispatch({
+		 type: CLEAR_ALERT
+	 })
 
 	 dispatch({
 		 type: SET_ALERT,
