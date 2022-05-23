@@ -1,4 +1,4 @@
-import {Fragment, useState} from "react";
+import {useState} from "react";
 import {Link, Navigate, useNavigate } from "react-router-dom"
 import {login} from "../../actions/auth"
 import {connect} from "react-redux"
@@ -58,6 +58,7 @@ const Login = ({ login, isAuthenticated}) => {
 					onChange={onChangeHandler}
 					name="password"
 					minLength="6"
+					required
 				  />
 				</div>
 				<input type="submit" className="btn btn-primary" value="Login" />

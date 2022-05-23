@@ -1,0 +1,26 @@
+:root {
+  --primary-color: #88b5cf;
+  --dark-color: #343a40;
+  --light-color: #f4f4f4;
+  --danger-color: #fa4d14;
+  --success-color: #28a745;
+}
+
+
+.alert {
+  padding: 0.8rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: #a892ee;
+  color: #333;
+}
+
+.alert-success {
+  background: #a892ee;
+  color: #fff;
+}
+
+.alert-danger {
+  background: #a892ee;
+  color: #fff;
+}

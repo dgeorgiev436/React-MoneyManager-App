@@ -16,7 +16,8 @@ const ExpenseSchema = new Schema({
 		required: true
 	},
 	date: {
-		type: Date
+		type: Date,
+		defaut: Date.now
 	}
 	
 })

@@ -1,12 +1,10 @@
 import {Link, useNavigate} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {Fragment} from "react"
 import "./Landing.css"
 import {logout} from "../../actions/auth"
 
 const Navbar = ({isAuthenticated, logout}) => {
-	const navigate = useNavigate()
 	
 	const logoutHandler = () => {
 		logout()
@@ -29,7 +27,7 @@ const Navbar = ({isAuthenticated, logout}) => {
 }
 
 Navbar.propTypes = {
-	isAuthenticated: PropTypes.bool.isRequired,
+	isAuthenticated: PropTypes.bool,
 	logout: PropTypes.func.isRequired
 }
 

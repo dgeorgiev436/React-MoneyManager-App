@@ -38,7 +38,13 @@ export const addExpense = (title, amount, date) => async dispatch => {
 		}
 	}
 	
-	date = new Date(date);
+// 	If date is sent through turn it into a date format
+// 	If date is not sent through take current date and time and assign it to date
+	if(date){
+		date = new Date(date);
+	}else{
+		date = new Date();
+	}
 
 	const body = JSON.stringify({title, amount, date})
 	
@@ -52,6 +58,8 @@ export const addExpense = (title, amount, date) => async dispatch => {
 		});
 		
 		dispatch(getAllUserExpenses());
+		
+		dispatch(setAlert("Expense Added", "success"))
 		
 	}catch(err){
 		
@@ -70,7 +78,7 @@ export const removeExpense = (id) => async dispatch => {
 	
 	try{
 		
-		const res = await axios.delete(`/api/expenses/${id}`)
+		await axios.delete(`/api/expenses/${id}`)
 		
 		dispatch({
 			type: DELETE_EXPENSE,
@@ -78,7 +86,7 @@ export const removeExpense = (id) => async dispatch => {
 		});
 		
 		
-		// dispatch(setAlert("Post Removed", "success"))
+		dispatch(setAlert("Expense removed", "success"))
 		
 	}catch(err){
 		

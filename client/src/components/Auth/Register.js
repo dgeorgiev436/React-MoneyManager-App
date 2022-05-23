@@ -1,4 +1,4 @@
-import {Fragment, useState} from "react";
+import {useState} from "react";
 import {Link, Navigate, useNavigate} from "react-router-dom"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
@@ -73,6 +73,7 @@ const Register = ({isAuthenticated, registerUser}) => {
 					onChange={onChangeHandler}
 					name="password"
 					minLength="6"
+					required
 				  />
 				</div>
 				<div className="user-box">
@@ -83,6 +84,7 @@ const Register = ({isAuthenticated, registerUser}) => {
 					onChange={onChangeHandler}
 					name="password2"
 					minLength="6"
+					required
 				  />
 				</div>
 				<input type="submit" className="btn btn-primary" value="Register" />
@@ -103,7 +105,7 @@ const Register = ({isAuthenticated, registerUser}) => {
 
 
 Register.propTypes = {
-	isAuthenticated: PropTypes.bool.isRequired,
+	isAuthenticated: PropTypes.bool,
 	registerUser: PropTypes.func.isRequired
 }
 
