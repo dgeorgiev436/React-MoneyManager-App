@@ -9,17 +9,14 @@ import Login from "./components/Auth/Login"
 import PrivateRoute from "./components/Routing/PrivateRoute"
 import Navbar from "./components/Layout/Navbar"
 import Alert from "./components/Layout/Alert"
-import PropTypes from "prop-types"
-import {connect} from "react-redux"
 
 const App = () => {
-
 
 	
 	
   return (
 	<Provider store={store}>
-		<Alert/>
+		<Alert />
 		<Navbar />
 		<Routes>
 			<Route exact path="/" element={<Landing />}/>
@@ -37,6 +34,5 @@ const App = () => {
 	</Provider>
   );
 }
-
 
 export default App;
