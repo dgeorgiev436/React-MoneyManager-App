@@ -66,6 +66,7 @@ header {
     display: flex;
     padding: var(--padding-md);
     justify-content: space-between;
+    margin-top: 10px;
 }
 
 .nav-bar {
@@ -139,8 +140,8 @@ input {
 }
 
 .btn {
-    width: 15rem;
-    max-width: 80%;
+    width: 100%;
+    max-width: 100%;
 }
 
 button:hover {
