@@ -40,7 +40,7 @@ router.post("/", [
 		
 // 		If not match
 		if(!isMatch){
-			return res.status(400).json({errros: [{msg: "Invalid Credentials"}]});
+			return res.status(400).json({errors: [{msg: "Invalid Credentials"}]});
 		}
 		
 // 		Return json web token
